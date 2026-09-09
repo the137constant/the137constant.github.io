@@ -53,6 +53,12 @@
   a:hover{text-decoration-color:currentColor}
   footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
   .disc{font-size:.9rem;color:var(--muted)}
+  .action{margin:22px 0 4px}
+  .btn{display:inline-block;padding:11px 18px;border:1px solid var(--fg);border-radius:8px;
+       font-weight:600;font-size:.95rem;text-decoration:none;color:var(--fg);background:transparent}
+  .btn:hover{background:var(--fg);color:var(--bg)}
+  .btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+  .action .disc{margin:10px 0 0;max-width:56ch}
   code{font-family:var(--mono);font-size:.88em}
 </style>
 </head>
@@ -95,6 +101,15 @@
       &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
       address.</strong>
     </p>
+  </div>
+
+  <div class="action">
+    <a class="btn"
+       href="https://app.uniswap.org/swap?chain=ethereum&amp;inputCurrency=ETH&amp;outputCurrency=0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3"
+       target="_blank" rel="noopener noreferrer">Buy 137 on Uniswap &#8599;</a>
+    <p class="disc">Opens the official Uniswap interface. Verify the token contract and review
+    price impact, slippage, network fees, and transaction details before confirming a swap.
+    Liquidity is shallow &mdash; see the disclosures below.</p>
   </div>
 
   <h2>Token facts</h2>
