@@ -69,8 +69,8 @@
 
   <p class="lede">
     A fixed-supply ERC-20 token on Ethereum. 32,000,000 tokens, minted once at deployment.
-    No owner, no administrator, no minting after deployment, no tax, no blacklist, no pause,
-    no upgrade path.
+    No owner or administrator role in the token contract, no minting after deployment, no tax,
+    no blacklist, no pause, no upgrade path.
   </p>
 
   <div class="card">
@@ -89,9 +89,10 @@
     <p style="margin:10px 0 0;font-size:.93rem">
       The contract above (name <code>137</code>, symbol <code>FS137</code>) is a
       <strong>retired pre-market deployment</strong>. It has no authorised liquidity or market
-      and is <strong>not</strong> the canonical ONE THIRTY SEVEN token. It was never
-      distributed and holds no market. Its name is the same string as this token's symbol, so
-      a search for &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
+      and is <strong>not</strong> the canonical ONE THIRTY SEVEN token. The retired contract
+      was never distributed outside the Treasury, and no liquidity pool or market was created
+      for it. Its name is the same string as this token's symbol, so a search for
+      &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
       address.</strong>
     </p>
   </div>
@@ -110,7 +111,7 @@
   <h2>Contract properties</h2>
   <ul>
     <li>Fixed supply — minted once in the constructor, never again</li>
-    <li>No owner and no administrator</li>
+    <li>No owner or administrator role in the token contract</li>
     <li>No post-deployment mint function</li>
     <li>No transfer tax, buy tax, or sell tax</li>
     <li>No blacklist, whitelist, or pause</li>
@@ -132,22 +133,24 @@
         only.</strong> Both sit at the same address under the same key. They are not vested,
         escrowed, time-locked, or cryptographically separated.</li>
       <li><strong>The LP position is retained by the treasury. It is not locked and not
-        burned.</strong> The treasury is able to withdraw the pooled ETH and tokens.</li>
+        burned.</strong> The Treasury controls the LP position and can remove liquidity,
+        receiving the underlying WETH and 137.</li>
       <li><strong>The pool is shallow.</strong> It launched with roughly $600 of total
         liquidity, so small trades move the price substantially. Any displayed price or market
         capitalisation should be read with that in mind.</li>
       <li><strong>The token has not been audited by an external security firm.</strong></li>
-      <li><strong>No return, utility, or future value is promised or implied.</strong></li>
+      <li><strong>No return, yield, price appreciation, or future value is promised or
+        implied.</strong></li>
     </ul>
   </div>
 
   <h2>About the name</h2>
   <p class="disc">
-    &ldquo;137&rdquo; references the approximate value of the inverse fine-structure constant
-    (about 137.036), a dimensionless constant in physics associated with the strength of the
-    electromagnetic interaction. The reference is naming inspiration only. This token makes no
+    &ldquo;137&rdquo; references &alpha;&#8315;&sup1; &asymp; 137.036, the inverse of the
+    dimensionless fine-structure constant &alpha;, which characterizes the strength of
+    electromagnetic coupling. The reference is naming inspiration only. This token makes no
     scientific claim and performs no scientific function. It is a standard ERC-20 token and is
-    <strong>not</strong> related to ERC-137, an unrelated Ethereum specification.
+    <strong>not</strong> related to ERC-137, the Ethereum Name Service specification.
   </p>
 
   <h2>Links</h2>
@@ -156,6 +159,7 @@
     <li><a href="https://etherscan.io/address/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3#code">Verified source code</a></li>
     <li><a href="https://etherscan.io/address/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8">Uniswap v2 pair on Etherscan</a></li>
     <li><a href="https://app.uniswap.org/explore/tokens/ethereum/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3">Uniswap</a></li>
+    <li><a href="https://www.geckoterminal.com/eth/pools/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8">GeckoTerminal &mdash; 137 / WETH pool</a></li>
     <li><a href="https://etherscan.io/address/0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df">Retired contract (do not use)</a></li>
     <li><a href="https://x.com/The137Constant">Official X — @The137Constant</a></li>
     <!-- optional: add a public source-code repository link here if one is ever published -->
@@ -166,9 +170,11 @@
     <tr><td>X</td><td><a href="https://x.com/The137Constant">@The137Constant</a></td></tr>
     <tr><td>Email</td><td><a href="mailto:the137constant@gmail.com">the137constant@gmail.com</a></td></tr>
   </table>
-  <p class="disc">These are the only official channels. Anyone contacting you as
-  &ldquo;ONE THIRTY SEVEN&rdquo; from anywhere else is not affiliated with this project. No
-  one here will ever ask for your seed phrase or private key.</p>
+  <p class="disc">The official direct communication channels are the X account and email
+  address listed above. Unsolicited contact claiming to represent ONE THIRTY SEVEN from any
+  other account should be treated as unaffiliated unless independently verified through these
+  channels. No one associated with the project will ever ask for a seed phrase or private
+  key.</p>
 
   <footer>
     ONE THIRTY SEVEN (137) · Ethereum mainnet ·
