@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONE THIRTY SEVEN (137)</title>
+<meta name="description" content="ONE THIRTY SEVEN (137) — a fixed-supply ERC-20 token on Ethereum. Canonical contract 0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3.">
+<link rel="icon" href="logo-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="logo-180.png">
+<meta property="og:title" content="ONE THIRTY SEVEN (137)">
+<meta property="og:description" content="Fixed-supply ERC-20 on Ethereum. Canonical contract 0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3.">
+<meta property="og:image" content="https://the137constant.github.io/logo-512.png">
+<meta property="og:url" content="https://the137constant.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@The137Constant">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#16181d; --muted:#5b6270; --line:#e3e6ec;
+    --card:#f7f8fa; --warn-bg:#fff6ed; --warn-line:#f0c9a0; --warn-fg:#7a3e00;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e1014; --fg:#e8eaee; --muted:#9aa2b1; --line:#252a33;
+      --card:#161a20; --warn-bg:#2a1c0e; --warn-line:#6b4a22; --warn-fg:#ffcf9a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1014; --fg:#e8eaee; --muted:#9aa2b1; --line:#252a33;
+    --card:#161a20; --warn-bg:#2a1c0e; --warn-line:#6b4a22; --warn-fg:#ffcf9a;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;padding:0}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 20px 72px}
+  header{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+  header img{width:76px;height:76px;border-radius:16px;flex:0 0 auto;background:#000;display:block}
+  h1{font-size:1.6rem;margin:0;letter-spacing:-.01em}
+  .ticker{color:var(--muted);font:600 .95rem/1.2 var(--mono);margin-top:4px}
+  p.lede{color:var(--muted);margin:20px 0 32px}
+  h2{font-size:1.05rem;margin:36px 0 12px;letter-spacing:-.01em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .addr{font:0.86rem/1.5 var(--mono);word-break:break-all;margin:2px 0 0}
+  .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 4px}
+  .warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-fg)}
+  .warn strong{color:var(--warn-fg)}
+  table{width:100%;border-collapse:collapse;font-size:.94rem}
+  td{padding:7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{color:var(--muted);width:44%;padding-right:14px}
+  ul{padding-left:20px;margin:10px 0}
+  li{margin:5px 0}
+  a{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--muted)}
+  a:hover{text-decoration-color:currentColor}
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+  .disc{font-size:.9rem;color:var(--muted)}
+  code{font-family:var(--mono);font-size:.88em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="logo-256.png" alt="ONE THIRTY SEVEN logo">
+    <div>
+      <h1>ONE THIRTY SEVEN</h1>
+      <div class="ticker">137 · ERC-20 · Ethereum</div>
+    </div>
+  </header>
+
+  <p class="lede">
+    A fixed-supply ERC-20 token on Ethereum. 32,000,000 tokens, minted once at deployment.
+    No owner, no administrator, no minting after deployment, no tax, no blacklist, no pause,
+    no upgrade path.
+  </p>
+
+  <div class="card">
+    <p class="label">Canonical Ethereum contract</p>
+    <p class="addr">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</p>
+  </div>
+
+  <div class="card">
+    <p class="label">Uniswap v2 pair (137 / WETH)</p>
+    <p class="addr">0x9e9f244558f6e4a81041192564361C1cEa2fEDA8</p>
+  </div>
+
+  <div class="card warn">
+    <p class="label" style="color:inherit;opacity:.85">Important — retired contract</p>
+    <p class="addr"><strong>0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df</strong></p>
+    <p style="margin:10px 0 0;font-size:.93rem">
+      The contract above (name <code>137</code>, symbol <code>FS137</code>) is a
+      <strong>retired pre-market deployment</strong>. It has no authorised liquidity or market
+      and is <strong>not</strong> the canonical ONE THIRTY SEVEN token. It was never
+      distributed and holds no market. Its name is the same string as this token's symbol, so
+      a search for &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
+      address.</strong>
+    </p>
+  </div>
+
+  <h2>Token facts</h2>
+  <table>
+    <tr><td>Name</td><td>ONE THIRTY SEVEN</td></tr>
+    <tr><td>Symbol</td><td>137</td></tr>
+    <tr><td>Decimals</td><td>18</td></tr>
+    <tr><td>Total supply</td><td>32,000,000 (fixed)</td></tr>
+    <tr><td>Network</td><td>Ethereum mainnet (chain ID 1)</td></tr>
+    <tr><td>Standard</td><td>ERC-20, built on OpenZeppelin Contracts 5.6.1</td></tr>
+    <tr><td>Source code</td><td>Verified on Etherscan (Exact Match)</td></tr>
+  </table>
+
+  <h2>Contract properties</h2>
+  <ul>
+    <li>Fixed supply — minted once in the constructor, never again</li>
+    <li>No owner and no administrator</li>
+    <li>No post-deployment mint function</li>
+    <li>No transfer tax, buy tax, or sell tax</li>
+    <li>No blacklist, whitelist, or pause</li>
+    <li>No proxy and no upgrade path — the deployed code is immutable</li>
+    <li>No max-wallet or max-transaction limits</li>
+  </ul>
+
+  <h2>Allocation and liquidity</h2>
+  <table>
+    <tr><td>Genesis liquidity</td><td>24,000,000 (75%) paired with 0.1206 ETH on Uniswap v2</td></tr>
+    <tr><td>Founder allocation</td><td>6,400,000 (20%), held at the treasury address</td></tr>
+    <tr><td>Ecosystem reserve</td><td>1,600,000 (5%), held at the same treasury address</td></tr>
+  </table>
+
+  <div class="card">
+    <p class="label">Please read — liquidity and allocation disclosures</p>
+    <ul style="margin-bottom:0">
+      <li><strong>The founder allocation and ecosystem reserve are an accounting designation
+        only.</strong> Both sit at the same address under the same key. They are not vested,
+        escrowed, time-locked, or cryptographically separated.</li>
+      <li><strong>The LP position is retained by the treasury. It is not locked and not
+        burned.</strong> The treasury is able to withdraw the pooled ETH and tokens.</li>
+      <li><strong>The pool is shallow.</strong> It launched with roughly $600 of total
+        liquidity, so small trades move the price substantially. Any displayed price or market
+        capitalisation should be read with that in mind.</li>
+      <li><strong>The token has not been audited by an external security firm.</strong></li>
+      <li><strong>No return, utility, or future value is promised or implied.</strong></li>
+    </ul>
+  </div>
+
+  <h2>About the name</h2>
+  <p class="disc">
+    &ldquo;137&rdquo; references the approximate value of the inverse fine-structure constant
+    (about 137.036), a dimensionless constant in physics associated with the strength of the
+    electromagnetic interaction. The reference is naming inspiration only. This token makes no
+    scientific claim and performs no scientific function. It is a standard ERC-20 token and is
+    <strong>not</strong> related to ERC-137, an unrelated Ethereum specification.
+  </p>
+
+  <h2>Links</h2>
+  <ul>
+    <li><a href="https://etherscan.io/token/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3">Token on Etherscan</a></li>
+    <li><a href="https://etherscan.io/address/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3#code">Verified source code</a></li>
+    <li><a href="https://etherscan.io/address/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8">Uniswap v2 pair on Etherscan</a></li>
+    <li><a href="https://app.uniswap.org/explore/tokens/ethereum/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3">Uniswap</a></li>
+    <li><a href="https://etherscan.io/address/0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df">Retired contract (do not use)</a></li>
+    <li><a href="https://x.com/The137Constant">Official X — @The137Constant</a></li>
+    <!-- optional: add a public source-code repository link here if one is ever published -->
+  </ul>
+
+  <h2>Official channels</h2>
+  <table>
+    <tr><td>X</td><td><a href="https://x.com/The137Constant">@The137Constant</a></td></tr>
+    <tr><td>Email</td><td><a href="mailto:the137constant@gmail.com">the137constant@gmail.com</a></td></tr>
+  </table>
+  <p class="disc">These are the only official channels. Anyone contacting you as
+  &ldquo;ONE THIRTY SEVEN&rdquo; from anywhere else is not affiliated with this project. No
+  one here will ever ask for your seed phrase or private key.</p>
+
+  <footer>
+    ONE THIRTY SEVEN (137) · Ethereum mainnet ·
+    <span class="addr" style="display:inline">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</span><br>
+    This page is informational. Nothing here is financial advice or an offer of any kind.
+    Cryptocurrency tokens can lose all of their value. Always verify contract addresses
+    yourself.
+  </footer>
+
+</div>
+</body>
+</html>
