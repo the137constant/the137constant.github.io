@@ -18,187 +18,498 @@
   :root{
     --bg:#ffffff; --fg:#16181d; --muted:#5b6270; --line:#e3e6ec;
     --card:#f7f8fa; --warn-bg:#fff6ed; --warn-line:#f0c9a0; --warn-fg:#7a3e00;
+    --accent:#0b47c9;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --shell:1120px; --gut:24px;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       --bg:#0e1014; --fg:#e8eaee; --muted:#9aa2b1; --line:#252a33;
       --card:#161a20; --warn-bg:#2a1c0e; --warn-line:#6b4a22; --warn-fg:#ffcf9a;
+      --accent:#7ba3ff;
     }
   }
   :root[data-theme="dark"]{
     --bg:#0e1014; --fg:#e8eaee; --muted:#9aa2b1; --line:#252a33;
     --card:#161a20; --warn-bg:#2a1c0e; --warn-line:#6b4a22; --warn-fg:#ffcf9a;
+    --accent:#7ba3ff;
   }
   *{box-sizing:border-box}
-  body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;padding:0}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 20px 72px}
-  header{display:flex;align-items:center;gap:18px;margin-bottom:8px}
-  header img{width:76px;height:76px;border-radius:16px;flex:0 0 auto;background:#000;display:block}
-  h1{font-size:1.6rem;margin:0;letter-spacing:-.01em}
-  .ticker{color:var(--muted);font:600 .95rem/1.2 var(--mono);margin-top:4px}
-  p.lede{color:var(--muted);margin:20px 0 32px}
-  h2{font-size:1.05rem;margin:36px 0 12px;letter-spacing:-.01em}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
-  .addr{font:0.86rem/1.5 var(--mono);word-break:break-all;margin:2px 0 0}
-  .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 4px}
-  .warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-fg)}
-  .warn strong{color:var(--warn-fg)}
-  table{width:100%;border-collapse:collapse;font-size:.94rem}
-  td{padding:7px 0;border-bottom:1px solid var(--line);vertical-align:top}
-  td:first-child{color:var(--muted);width:44%;padding-right:14px}
-  ul{padding-left:20px;margin:10px 0}
-  li{margin:5px 0}
-  a{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--muted)}
-  a:hover{text-decoration-color:currentColor}
-  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
-  .disc{font-size:.9rem;color:var(--muted)}
-  .action{margin:22px 0 4px}
-  .btn{display:inline-block;padding:11px 18px;border:1px solid var(--fg);border-radius:8px;
-       font-weight:600;font-size:.95rem;text-decoration:none;color:var(--fg);background:transparent}
-  .btn:hover{background:var(--fg);color:var(--bg)}
-  .btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-  .action .disc{margin:10px 0 0;max-width:56ch}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  :target,section[id],#retired{scroll-margin-top:78px}
+  body{background:var(--bg);color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    margin:0;padding:0}
+
+  /* ---------- shared primitives ---------- */
+  .shell{max-width:var(--shell);margin:0 auto;padding:0 var(--gut)}
+  .rule{border:0;border-top:1px solid var(--line);margin:0}
+  section{padding:64px 0}
+  .eyebrow{font:600 .72rem/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent);flex:0 0 auto}
+  h2{font-size:clamp(1.5rem,3.4vw,2.05rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 18px;font-weight:650}
+  h3{font-size:.82rem;font-weight:650;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 14px;font-family:var(--mono)}
+  p{margin:0 0 16px}
+  .prose{max-width:62ch;color:var(--muted)}
+  .prose strong{color:var(--fg);font-weight:600}
+  .lede{max-width:56ch;font-size:1.06rem;color:var(--muted)}
+  a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);
+    transition:text-decoration-color .15s ease,color .15s ease}
+  a:hover{text-decoration-color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
   code{font-family:var(--mono);font-size:.88em}
+  .addr{font:.86rem/1.5 var(--mono);word-break:break-all;overflow-wrap:anywhere}
+
+  /* ---------- header ---------- */
+  .topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    -webkit-backdrop-filter:saturate(160%) blur(10px);backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid var(--line)}
+  @supports not (background:color-mix(in srgb,red 50%,transparent)){.topbar{background:var(--bg)}}
+  .topbar .shell{display:flex;align-items:center;gap:22px;min-height:58px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:0 0 auto}
+  .brand img{width:28px;height:28px;border-radius:7px;background:#000;display:block}
+  .brand span{font:600 .8rem/1 var(--mono);letter-spacing:.1em}
+  .nav{display:flex;gap:22px;margin-left:auto;align-items:center}
+  .nav a{font:.82rem/1 inherit;color:var(--muted);text-decoration:none;letter-spacing:.02em;
+    white-space:nowrap;padding:13px 0;display:inline-block}
+  .nav a:hover{color:var(--fg)}
+  .topbar .btn{padding:8px 14px;font-size:.8rem;flex:0 0 auto}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 22px;border-radius:8px;font-weight:600;font-size:.95rem;
+    text-decoration:none;border:1px solid var(--fg);background:var(--fg);color:var(--bg);
+    min-height:44px;transition:opacity .15s ease,background .15s ease,color .15s ease}
+  .btn:hover{opacity:.86}
+  .btn--ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+  .btn--ghost:hover{opacity:1;border-color:var(--fg)}
+  .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 44px}
+  .hero .shell{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+  .hero h1{font-size:clamp(2.4rem,6.4vw,3.9rem);line-height:1.02;letter-spacing:-.035em;
+    margin:0 0 20px;font-weight:600}
+  .hero h1 .n{display:block;font:600 .78rem/1.3 var(--mono);letter-spacing:.18em;
+    color:var(--muted);margin-bottom:18px}
+  .hero-art{justify-self:center;display:none}
+  .hero-art img{width:min(272px,30vw);height:auto;border-radius:26px;background:#000;display:block}
+  .caution{display:flex;gap:10px;margin:20px 0 0;max-width:56ch;font-size:.86rem;color:var(--muted)}
+  .caution::before{content:"";flex:0 0 2px;background:var(--warn-line);border-radius:2px}
+  .caution b{color:var(--fg);font-weight:600}
+
+  /* ---------- verification strip ---------- */
+  .verify{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:transparent;padding:0}
+  .verify .shell{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .fact{padding:20px 0;border-top:1px solid var(--line)}
+  .fact:first-child{border-top:0}
+  .fact .k{font:600 .68rem/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 6px}
+  .fact .v{margin:0;font-size:.98rem;font-weight:550}
+  .fact--addr{grid-column:1/-1}
+  .fact--addr .addr{margin:0;font-size:.82rem}
+  .verify-links{grid-column:1/-1;border-top:1px solid var(--line);padding:16px 0;
+    display:flex;flex-wrap:wrap;gap:8px 26px;font-size:.85rem}
+  .verify-links a{color:var(--muted);text-decoration:none}
+  .verify-links a:hover{color:var(--fg)}
+
+  /* ---------- why ---------- */
+  .why .shell{display:grid;grid-template-columns:1fr;gap:36px;align-items:start}
+  .alpha{font:300 clamp(2.2rem,7vw,3.4rem)/1.1 var(--mono);letter-spacing:-.02em;margin:0}
+  .alpha sup{font-size:.5em;vertical-align:.72em;letter-spacing:0;margin-left:.02em}
+  .alpha .val{color:var(--accent)}
+  .alpha-note{font:.78rem/1.5 var(--mono);color:var(--muted);margin:14px 0 0;letter-spacing:.04em}
+
+  /* ---------- data lists ---------- */
+  .cols{display:grid;grid-template-columns:1fr;gap:40px}
+  dl.spec{margin:0;font-size:.94rem}
+  dl.spec div{display:grid;grid-template-columns:minmax(9rem,40%) 1fr;gap:14px;
+    padding:10px 0;border-bottom:1px solid var(--line)}
+  dl.spec dt{color:var(--muted);margin:0}
+  dl.spec dd{margin:0}
+  ul.plain{list-style:none;padding:0;margin:0;font-size:.94rem}
+  ul.plain li{padding:9px 0 9px 20px;border-bottom:1px solid var(--line);position:relative;color:var(--muted)}
+  ul.plain li::before{content:"";position:absolute;left:2px;top:1.4em;width:6px;height:1px;background:var(--muted)}
+
+  /* ---------- steps ---------- */
+  .steps{display:grid;grid-template-columns:1fr;gap:28px;counter-reset:s;margin:0;padding:0;list-style:none}
+  .steps li{counter-increment:s;padding-top:16px;border-top:1px solid var(--line)}
+  .steps li::before{content:counter(s,decimal-leading-zero);display:block;
+    font:600 .78rem/1 var(--mono);letter-spacing:.1em;color:var(--accent);margin-bottom:11px}
+  .steps h4{margin:0 0 7px;font-size:1rem;font-weight:600}
+  .steps p{margin:0;font-size:.9rem;color:var(--muted)}
+
+  /* ---------- disclosures ---------- */
+  .panel{border:1px solid var(--line);border-radius:10px;padding:20px 22px;background:var(--card)}
+  .panel.warn{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn-fg)}
+  .panel.warn strong,.panel.warn .k{color:inherit}
+  .panel.warn .addr{font-weight:700}
+  .panel .k{font:600 .68rem/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 8px}
+  ul.disc{list-style:none;padding:0;margin:0;font-size:.93rem}
+  ul.disc li{padding:14px 0 14px 18px;border-top:1px solid var(--line);
+    color:var(--muted);border-left:2px solid var(--line);padding-left:18px}
+  ul.disc li:first-child{border-top:0}
+  ul.disc strong{color:var(--fg);font-weight:600}
+
+  /* ---------- channels ---------- */
+  .chan{display:grid;grid-template-columns:1fr;gap:36px}
+  .linklist{list-style:none;padding:0;margin:0;font-size:.92rem}
+  .linklist li{padding:9px 0;border-bottom:1px solid var(--line)}
+  .linklist a{text-decoration:none;color:var(--fg)}
+  .linklist a:hover{color:var(--accent)}
+  .linklist .note{color:var(--muted);font-size:.85rem}
+
+  footer{border-top:1px solid var(--line);padding:34px 0 56px;color:var(--muted);font-size:.86rem}
+  footer .addr{display:inline;font-size:.8rem}
+  footer p{max-width:70ch}
+
+  .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:400px){
+    .hero h1{font-size:2.15rem}
+    .hero h1 .n{margin-bottom:14px}
+  }
+  @media (min-width:600px){
+    .verify .shell{grid-template-columns:repeat(3,1fr);column-gap:32px}
+    .steps{grid-template-columns:repeat(3,1fr);gap:26px}
+  }
+  @media (min-width:820px){
+    :root{--gut:40px}
+    section{padding:84px 0}
+    .hero{padding:96px 0 56px}
+    .hero .shell{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px}
+    .hero-art{display:block}
+    .why .shell{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px}
+    .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+    .chan{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+    .alpha{padding-top:6px}
+  }
+  @media (max-width:819px){
+    .hero{padding:36px 0 30px}
+    .hero h1{margin-bottom:16px}
+    .lede{font-size:1rem}
+    .btn-row{margin-top:24px}
+    .caution{margin-top:16px}
+    .nav{display:none}
+    .brand span{display:none}
+    .topbar .shell{gap:14px;justify-content:space-between}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <img src="logo-256.png" alt="ONE THIRTY SEVEN logo">
-    <div>
-      <h1>ONE THIRTY SEVEN</h1>
-      <div class="ticker">137 · ERC-20 · Ethereum</div>
-    </div>
-  </header>
-
-  <p class="lede">
-    A fixed-supply ERC-20 token on Ethereum. 32,000,000 tokens, minted once at deployment.
-    No owner or administrator role in the token contract, no minting after deployment, no tax,
-    no blacklist, no pause, no upgrade path.
-  </p>
-
-  <div class="card">
-    <p class="label">Canonical Ethereum contract</p>
-    <p class="addr">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</p>
-  </div>
-
-  <div class="card">
-    <p class="label">Uniswap v2 pair (137 / WETH)</p>
-    <p class="addr">0x9e9f244558f6e4a81041192564361C1cEa2fEDA8</p>
-  </div>
-
-  <div class="card warn">
-    <p class="label" style="color:inherit;opacity:.85">Important — retired contract</p>
-    <p class="addr"><strong>0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df</strong></p>
-    <p style="margin:10px 0 0;font-size:.93rem">
-      The contract above (name <code>137</code>, symbol <code>FS137</code>) is a
-      <strong>retired pre-market deployment</strong>. It has no authorised liquidity or market
-      and is <strong>not</strong> the canonical ONE THIRTY SEVEN token. The retired contract
-      was never distributed outside the Treasury, and no liquidity pool or market was created
-      for it. Its name is the same string as this token's symbol, so a search for
-      &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
-      address.</strong>
-    </p>
-  </div>
-
-  <div class="action">
+<header class="topbar">
+  <div class="shell">
+    <a class="brand" href="#top">
+      <img src="logo-256.png" alt="" width="28" height="28">
+      <span>137</span>
+      <span class="vh">ONE THIRTY SEVEN — back to top</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#why">Why 137</a>
+      <a href="#token">Token</a>
+      <a href="#acquire">How to buy</a>
+      <a href="#disclosures">Disclosures</a>
+    </nav>
     <a class="btn"
        href="https://app.uniswap.org/swap?chain=ethereum&amp;inputCurrency=ETH&amp;outputCurrency=0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3"
-       target="_blank" rel="noopener noreferrer">Buy 137 on Uniswap &#8599;</a>
-    <p class="disc">Opens the official Uniswap interface. Verify the token contract and review
-    price impact, slippage, network fees, and transaction details before confirming a swap.
-    Liquidity is shallow &mdash; see the disclosures below.</p>
+       target="_blank" rel="noopener noreferrer">Trade 137 on Uniswap <span aria-hidden="true">&#8599;</span><span class="vh">(opens in a new tab)</span></a>
   </div>
+</header>
 
-  <h2>Token facts</h2>
-  <table>
-    <tr><td>Name</td><td>ONE THIRTY SEVEN</td></tr>
-    <tr><td>Symbol</td><td>137</td></tr>
-    <tr><td>Decimals</td><td>18</td></tr>
-    <tr><td>Total supply</td><td>32,000,000 (fixed)</td></tr>
-    <tr><td>Network</td><td>Ethereum mainnet (chain ID 1)</td></tr>
-    <tr><td>Standard</td><td>ERC-20, built on OpenZeppelin Contracts 5.6.1</td></tr>
-    <tr><td>Source code</td><td>Verified on Etherscan (Exact Match)</td></tr>
-  </table>
+<main id="top">
 
-  <h2>Contract properties</h2>
-  <ul>
-    <li>Fixed supply — minted once in the constructor, never again</li>
-    <li>No owner or administrator role in the token contract</li>
-    <li>No post-deployment mint function</li>
-    <li>No transfer tax, buy tax, or sell tax</li>
-    <li>No blacklist, whitelist, or pause</li>
-    <li>No proxy and no upgrade path — the deployed code is immutable</li>
-    <li>No max-wallet or max-transaction limits</li>
-  </ul>
+  <!-- ============ IDENTITY + ACTION ============ -->
+  <section class="hero" aria-labelledby="h-title">
+    <div class="shell">
+      <div>
+        <h1 id="h-title"><span class="n">137 &middot; ERC&#8209;20 &middot; Ethereum</span>ONE THIRTY SEVEN</h1>
+        <p class="lede">
+          A fixed-supply ERC-20 token on Ethereum. 32,000,000 tokens, minted once at
+          deployment. No owner or administrator role in the token contract, no minting after
+          deployment, no tax, no blacklist, no pause, no upgrade path.
+        </p>
 
-  <h2>Allocation and liquidity</h2>
-  <table>
-    <tr><td>Genesis liquidity</td><td>24,000,000 (75%) paired with 0.1206 ETH on Uniswap v2</td></tr>
-    <tr><td>Founder allocation</td><td>6,400,000 (20%), held at the treasury address</td></tr>
-    <tr><td>Ecosystem reserve</td><td>1,600,000 (5%), held at the same treasury address</td></tr>
-  </table>
+        <div class="btn-row">
+          <a class="btn"
+             href="https://app.uniswap.org/swap?chain=ethereum&amp;inputCurrency=ETH&amp;outputCurrency=0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3"
+             target="_blank" rel="noopener noreferrer">Trade 137 on Uniswap <span aria-hidden="true">&#8599;</span><span class="vh">(opens in a new tab)</span></a>
+          <a class="btn btn--ghost"
+             href="https://etherscan.io/address/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3#code"
+             target="_blank" rel="noopener noreferrer">View contract <span aria-hidden="true">&#8599;</span><span class="vh">(opens in a new tab)</span></a>
+        </div>
 
-  <div class="card">
-    <p class="label">Please read — liquidity and allocation disclosures</p>
-    <ul style="margin-bottom:0">
-      <li><strong>The founder allocation and ecosystem reserve are an accounting designation
-        only.</strong> Both sit at the same address under the same key. They are not vested,
-        escrowed, time-locked, or cryptographically separated.</li>
-      <li><strong>The LP position is retained by the treasury. It is not locked and not
-        burned.</strong> The Treasury controls the LP position and can remove liquidity,
-        receiving the underlying WETH and 137.</li>
-      <li><strong>The pool is shallow.</strong> It launched with roughly $600 of total
-        liquidity, so small trades move the price substantially. Any displayed price or market
-        capitalisation should be read with that in mind.</li>
-      <li><strong>The token has not been audited by an external security firm.</strong></li>
-      <li><strong>No return, yield, price appreciation, or future value is promised or
-        implied.</strong></li>
-    </ul>
+        <p class="caution">
+          <span><b>Verify the canonical contract before trading.</b> A
+          <a href="#retired">retired pre-market deployment</a> also exists and must not be
+          used.</span>
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <img src="logo-512.png" alt="" width="300" height="300">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERIFICATION ============ -->
+  <section class="verify" style="padding:0" aria-label="Verification">
+    <div class="shell">
+      <div class="fact fact--addr">
+        <p class="k">Canonical contract</p>
+        <p class="addr">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</p>
+      </div>
+
+      <div class="fact">
+        <p class="k">Network</p>
+        <p class="v">Ethereum mainnet</p>
+      </div>
+      <div class="fact">
+        <p class="k">Symbol</p>
+        <p class="v">137</p>
+      </div>
+      <div class="fact">
+        <p class="k">Total supply</p>
+        <p class="v">32,000,000 &middot; fixed</p>
+      </div>
+
+      <div class="verify-links">
+        <a href="https://etherscan.io/token/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3" target="_blank" rel="noopener noreferrer">Token on Etherscan &#8599;</a>
+        <a href="https://etherscan.io/address/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3#code" target="_blank" rel="noopener noreferrer">Verified source code &#8599;</a>
+        <a href="https://etherscan.io/address/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8" target="_blank" rel="noopener noreferrer">Uniswap v2 pair &#8599;</a>
+        <a href="https://www.geckoterminal.com/eth/pools/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8" target="_blank" rel="noopener noreferrer">GeckoTerminal pool &#8599;</a>
+        <a href="https://app.uniswap.org/explore/tokens/ethereum/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3" target="_blank" rel="noopener noreferrer">Uniswap token page &#8599;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORY ============ -->
+  <section class="why" id="why" aria-labelledby="h-why">
+    <div class="shell">
+      <div>
+        <p class="eyebrow">The name</p>
+        <h2 id="h-why">Why 137?</h2>
+        <p class="prose">
+          &ldquo;137&rdquo; references &alpha;&#8315;&sup1; &asymp; 137.036, the inverse of the
+          dimensionless fine-structure constant &alpha;, which characterizes the strength of
+          electromagnetic coupling.
+        </p>
+        <p class="prose">
+          The reference is naming inspiration only. This token makes <strong>no scientific
+          claim</strong> and performs <strong>no scientific function</strong>. It is a standard
+          ERC-20 token and is <strong>not</strong> related to ERC-137, the Ethereum Name Service
+          specification.
+        </p>
+      </div>
+      <div>
+        <p class="alpha" aria-hidden="true">&alpha;<sup>&minus;1</sup><br><span class="val">137.036</span></p>
+        <p class="alpha-note">Inverse fine-structure constant<br>&mdash; dimensionless, approximate</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ TOKEN DETAILS ============ -->
+  <section id="token" aria-labelledby="h-token">
+    <div class="shell">
+      <p class="eyebrow">Reference</p>
+      <h2 id="h-token">Token details</h2>
+
+      <div class="cols" style="margin-top:34px">
+        <div>
+          <h3>Token facts</h3>
+          <dl class="spec">
+            <div><dt>Name</dt><dd>ONE THIRTY SEVEN</dd></div>
+            <div><dt>Symbol</dt><dd>137</dd></div>
+            <div><dt>Decimals</dt><dd>18</dd></div>
+            <div><dt>Total supply</dt><dd>32,000,000 (fixed)</dd></div>
+            <div><dt>Network</dt><dd>Ethereum mainnet (chain ID 1)</dd></div>
+            <div><dt>Standard</dt><dd>ERC-20, built on OpenZeppelin Contracts 5.6.1</dd></div>
+            <div><dt>Source code</dt><dd>Verified on Etherscan (Exact Match)</dd></div>
+          </dl>
+        </div>
+
+        <div>
+          <h3>Contract properties</h3>
+          <ul class="plain">
+            <li>Fixed supply &mdash; minted once in the constructor, never again</li>
+            <li>No owner or administrator role in the token contract</li>
+            <li>No post-deployment mint function</li>
+            <li>No transfer tax, buy tax, or sell tax</li>
+            <li>No blacklist, whitelist, or pause</li>
+            <li>No proxy and no upgrade path &mdash; the deployed code is immutable</li>
+            <li>No max-wallet or max-transaction limits</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:52px">
+        <h3>Allocation and liquidity</h3>
+        <dl class="spec" style="max-width:62ch">
+          <div><dt>Genesis liquidity</dt><dd>24,000,000 (75%) paired with 0.1206 ETH on Uniswap v2</dd></div>
+          <div><dt>Founder allocation</dt><dd>6,400,000 (20%), held at the treasury address</dd></div>
+          <div><dt>Ecosystem reserve</dt><dd>1,600,000 (5%), held at the same treasury address</dd></div>
+        </dl>
+        <p class="prose" style="margin-top:16px;font-size:.9rem">
+          How these holdings are &mdash; and are not &mdash; constrained is set out in the
+          <a href="#disclosures">disclosures</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ HOW TO ACQUIRE ============ -->
+  <section id="acquire" aria-labelledby="h-acquire">
+    <div class="shell">
+      <p class="eyebrow">Acquiring 137</p>
+      <h2 id="h-acquire">How to buy</h2>
+      <p class="lede" style="font-size:1rem">
+        137 trades in a single Uniswap v2 market against WETH on Ethereum mainnet. This site
+        holds no wallet functionality &mdash; every transaction happens on Uniswap.
+      </p>
+
+      <ol class="steps" style="margin-top:40px">
+        <li>
+          <h4>Connect a wallet</h4>
+          <p>Open the Uniswap interface with an Ethereum wallet on mainnet, funded with ETH for
+          the swap and network fees.</p>
+        </li>
+        <li>
+          <h4>Verify the contract</h4>
+          <p>Confirm the token address reads
+          <span class="addr" style="font-size:.8rem;display:block;margin:6px 0">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</span>
+          before selecting it. Name and symbol are not unique; the address is the identity.</p>
+        </li>
+        <li>
+          <h4>Review, then swap</h4>
+          <p>Check price impact, slippage, network fees and the transaction details. Liquidity is
+          shallow, so small trades move the price substantially.</p>
+        </li>
+      </ol>
+
+      <div class="btn-row">
+        <a class="btn"
+           href="https://app.uniswap.org/swap?chain=ethereum&amp;inputCurrency=ETH&amp;outputCurrency=0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3"
+           target="_blank" rel="noopener noreferrer">Trade 137 on Uniswap <span aria-hidden="true">&#8599;</span><span class="vh">(opens in a new tab)</span></a>
+        <a class="btn btn--ghost"
+           href="https://etherscan.io/address/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8"
+           target="_blank" rel="noopener noreferrer">View the pool <span aria-hidden="true">&#8599;</span><span class="vh">(opens in a new tab)</span></a>
+      </div>
+      <p class="prose" style="margin-top:18px;font-size:.86rem">
+        Opens the official Uniswap interface. Nothing here is financial advice.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ DISCLOSURES ============ -->
+  <section id="disclosures" aria-labelledby="h-disc">
+    <div class="shell">
+      <p class="eyebrow">Please read</p>
+      <h2 id="h-disc">Disclosures</h2>
+
+      <div class="panel warn" id="retired" style="margin-top:30px;max-width:76ch">
+        <p class="k">Important &mdash; retired contract</p>
+        <p class="addr"><strong>0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df</strong></p>
+        <p style="margin:12px 0 0;font-size:.93rem">
+          The contract above (name <code>137</code>, symbol <code>FS137</code>) is a
+          <strong>retired pre-market deployment</strong>. It has no authorised liquidity or market
+          and is <strong>not</strong> the canonical ONE THIRTY SEVEN token. The retired contract
+          was never distributed outside the Treasury, and no liquidity pool or market was created
+          for it. Its name is the same string as this token's symbol, so a search for
+          &ldquo;137&rdquo; can return it &mdash; <strong>always verify the contract
+          address.</strong>
+        </p>
+        <p style="margin:12px 0 0;font-size:.9rem">
+          <a href="https://etherscan.io/address/0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df" target="_blank" rel="noopener noreferrer">Retired contract on Etherscan (do not use) &#8599;</a>
+        </p>
+      </div>
+
+      <div style="margin-top:44px">
+        <h3>Liquidity and allocation</h3>
+        <ul class="disc" style="max-width:76ch">
+          <li><strong>The founder allocation and ecosystem reserve are an accounting designation
+            only.</strong> Both sit at the same address under the same key. They are not vested,
+            escrowed, time-locked, or cryptographically separated.</li>
+          <li><strong>The LP position is retained by the treasury. It is not locked and not
+            burned.</strong> The Treasury controls the LP position and can remove liquidity,
+            receiving the underlying WETH and 137.</li>
+          <li><strong>The pool is shallow.</strong> It launched with roughly $600 of total
+            liquidity, so small trades move the price substantially. Any displayed price or market
+            capitalisation should be read with that in mind.</li>
+          <li><strong>The token has not been audited by an external security firm.</strong></li>
+          <li><strong>No return, yield, price appreciation, or future value is promised or
+            implied.</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ COMMUNITY / RELATED ============ -->
+  <section id="channels" aria-labelledby="h-chan">
+    <div class="shell">
+      <p class="eyebrow">Elsewhere</p>
+      <h2 id="h-chan">Official channels</h2>
+
+      <div class="chan" style="margin-top:34px">
+        <div>
+          <h3>Contact</h3>
+          <ul class="linklist">
+            <li><a href="https://x.com/The137Constant" target="_blank" rel="noopener noreferrer">X &mdash; @The137Constant &#8599;</a></li>
+            <li><a href="mailto:the137constant@gmail.com">the137constant@gmail.com</a></li>
+          </ul>
+          <p class="prose" style="margin-top:16px;font-size:.86rem">
+            The official direct communication channels are the X account and email address listed
+            above. Unsolicited contact claiming to represent ONE THIRTY SEVEN from any other
+            account should be treated as unaffiliated unless independently verified through these
+            channels. <strong>No one associated with the project will ever ask for a seed phrase
+            or private key.</strong>
+          </p>
+        </div>
+
+        <div>
+          <h3>Related project</h3>
+          <ul class="linklist">
+            <li>
+              <a href="https://www.toonkami.com/" target="_blank" rel="noopener noreferrer">ToonKami &#8599;</a>
+              <span class="note" style="display:block">From the creator of ToonKami. ToonKami is a separate project and is not part of the 137 token or its market.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <p style="margin-bottom:10px">
+      ONE THIRTY SEVEN (137) &middot; Ethereum mainnet<br>
+      <span class="addr">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</span>
+    </p>
+    <p style="margin:0">
+      This page is informational. Nothing here is financial advice or an offer of any kind.
+      Cryptocurrency tokens can lose all of their value. Always verify contract addresses
+      yourself.
+    </p>
   </div>
-
-  <h2>About the name</h2>
-  <p class="disc">
-    &ldquo;137&rdquo; references &alpha;&#8315;&sup1; &asymp; 137.036, the inverse of the
-    dimensionless fine-structure constant &alpha;, which characterizes the strength of
-    electromagnetic coupling. The reference is naming inspiration only. This token makes no
-    scientific claim and performs no scientific function. It is a standard ERC-20 token and is
-    <strong>not</strong> related to ERC-137, the Ethereum Name Service specification.
-  </p>
-
-  <h2>Links</h2>
-  <ul>
-    <li><a href="https://etherscan.io/token/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3">Token on Etherscan</a></li>
-    <li><a href="https://etherscan.io/address/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3#code">Verified source code</a></li>
-    <li><a href="https://etherscan.io/address/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8">Uniswap v2 pair on Etherscan</a></li>
-    <li><a href="https://app.uniswap.org/explore/tokens/ethereum/0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3">Uniswap</a></li>
-    <li><a href="https://www.geckoterminal.com/eth/pools/0x9e9f244558f6e4a81041192564361C1cEa2fEDA8">GeckoTerminal &mdash; 137 / WETH pool</a></li>
-    <li><a href="https://etherscan.io/address/0x065A7eaBCc53733630B0A830818C06Dc1B2c98Df">Retired contract (do not use)</a></li>
-    <li><a href="https://x.com/The137Constant">Official X — @The137Constant</a></li>
-    <!-- optional: add a public source-code repository link here if one is ever published -->
-  </ul>
-
-  <h2>Official channels</h2>
-  <table>
-    <tr><td>X</td><td><a href="https://x.com/The137Constant">@The137Constant</a></td></tr>
-    <tr><td>Email</td><td><a href="mailto:the137constant@gmail.com">the137constant@gmail.com</a></td></tr>
-  </table>
-  <p class="disc">The official direct communication channels are the X account and email
-  address listed above. Unsolicited contact claiming to represent ONE THIRTY SEVEN from any
-  other account should be treated as unaffiliated unless independently verified through these
-  channels. No one associated with the project will ever ask for a seed phrase or private
-  key.</p>
-
-  <footer>
-    ONE THIRTY SEVEN (137) · Ethereum mainnet ·
-    <span class="addr" style="display:inline">0xf01f71774aDb4E4bE505858e89D8d89ad9aaB5e3</span><br>
-    This page is informational. Nothing here is financial advice or an offer of any kind.
-    Cryptocurrency tokens can lose all of their value. Always verify contract addresses
-    yourself.
-  </footer>
-
-</div>
+</footer>
 </body>
 </html>
