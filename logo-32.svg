@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="ONE THIRTY SEVEN (137)">
+<title>ONE THIRTY SEVEN (137)</title>
+<defs>
+<linearGradient id="m" x1="0" y1="11.688" x2="0" y2="20.25" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#f2f8fc"/>
+<stop offset=".55" stop-color="#e0f0fa"/>
+<stop offset="1" stop-color="#cfe6f6"/>
+</linearGradient>
+</defs>
+<rect width="32" height="32" fill="#000000"/>
+<g fill="none">
+<circle cx="15.906" cy="15.656" r="12.375" stroke="#005cff" stroke-width="3.4" opacity=".16"/>
+<circle cx="15.906" cy="15.656" r="12.375" stroke="#0a6bff" stroke-width="2.1" opacity=".3"/>
+<circle cx="15.906" cy="15.656" r="12.375" stroke="#2f8dff" stroke-width="1.2" opacity=".55"/>
+<circle cx="15.906" cy="15.656" r="12.375" stroke="#9fd4ff" stroke-width=".62" opacity=".9"/>
+<circle cx="15.906" cy="15.656" r="12.375" stroke="#eaf6ff" stroke-width=".3"/>
+</g>
+<g fill="url(#m)">
+<path d="M8.875 11.750 L9.000 11.750 L9.000 20.312 L7.188 20.312 L7.188 14.062 L5.562 14.000 Z"/>
+<path d="M10.000 11.750 L16.312 11.750 L16.938 12.000 L18.000 13.062 L18.312 13.750 L18.312 14.500 L18.000 15.188 L17.312 15.812 L18.062 16.438 L18.375 17.188 L18.438 18.000 L18.062 19.125 L17.438 19.812 L16.750 20.188 L16.125 20.312 L9.375 20.312 L10.938 18.688 L15.812 18.688 L16.500 18.250 L16.688 17.688 L16.500 17.000 L15.938 16.562 L15.750 16.625 L15.812 16.500 L12.375 16.562 L10.938 15.125 L16.062 15.000 L16.625 14.375 L16.625 13.875 L16.250 13.312 L10.062 13.250 Z"/>
+<path d="M17.625 11.688 L26.000 11.688 L26.062 11.812 L26.000 12.125 L21.250 19.312 L20.812 20.312 L18.562 20.250 L23.438 13.250 L18.875 13.188 L17.562 11.812 Z"/>
+</g>
+</svg>
